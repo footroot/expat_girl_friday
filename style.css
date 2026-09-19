@@ -1,0 +1,529 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+}
+
+:root {
+    --navy: #0c427c;
+    --yellow: #ffd21f;
+    --cream: #fffdf7
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px
+}
+
+body {
+    font-family: Nunito, Arial, sans-serif;
+    color: var(--navy);
+    background: var(--cream);
+    line-height: 1.55
+}
+
+a {
+    text-decoration: none;
+    color: inherit
+}
+
+.button {
+    display: inline-block;
+    padding: 12px 25px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--yellow);
+    font-weight: 900;
+    transition: .2s
+}
+
+.button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 18px #0c427c2b
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 5%;
+    background: #fffffff5;
+    box-shadow: 0 2px 15px #073c7312
+}
+
+.brand {
+    font: 700 clamp(1.7rem, 3vw, 2.35rem) Caveat, cursive
+}
+
+.brand:first-letter {
+    color: var(--yellow)
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    font-weight: 900
+}
+
+nav a:not(.nav-button) {
+    padding: 8px 0;
+    border-bottom: 3px solid transparent
+}
+
+nav a:not(.nav-button):hover {
+    border-color: var(--yellow)
+}
+
+.nav-button {
+    padding: 11px 28px;
+    background: var(--yellow);
+    border-radius: 999px
+}
+
+#menuToggle {
+    display: none;
+    border: 0;
+    background: none;
+    font-size: 1.7rem;
+    color: var(--navy)
+}
+
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    background: linear-gradient(#a7e1ff, #effaff)
+}
+
+.hero-copy {
+    padding: 42px 5% 48px 10%;
+    z-index: 2
+}
+
+.sun {
+    font-size: 3.7rem;
+    color: var(--yellow)
+}
+
+h1,
+h2,
+h3 {
+    font-family: Caveat, cursive;
+    line-height: 1
+}
+
+h1 {
+    font-size: clamp(3.3rem, 5vw, 5.8rem)
+}
+
+.highlight {
+    display: inline-block;
+    margin: 18px 0 14px;
+    padding: 7px 30px;
+    background: var(--yellow);
+    font: 700 clamp(1.8rem, 3vw, 2.7rem) Caveat, cursive;
+    line-height: 1.05;
+    text-align: center;
+    clip-path: polygon(2% 12%, 97% 0, 100% 44%, 95% 85%, 3% 100%, 0 52%)
+}
+
+.hero-copy p {
+    margin-bottom: 20px;
+    font-weight: 800
+}
+
+.landscape {
+    position: relative;
+    min-height: 380px;
+    overflow: hidden;
+    background: linear-gradient(#a7e1ff, #f9fff4)
+}
+
+.mountain {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 230px solid transparent;
+    border-right: 230px solid transparent;
+    border-bottom: 300px solid #8fc7d9
+}
+
+.one {
+    left: -40px
+}
+
+.two {
+    right: -100px;
+    border-bottom-color: #6eabb9
+}
+
+.castle {
+    position: absolute;
+    right: 24%;
+    top: 70px;
+    font-size: 5.2rem
+}
+
+.village {
+    position: absolute;
+    bottom: 38px;
+    left: 18%;
+    font-size: 3.8rem;
+    letter-spacing: -17px;
+    white-space: nowrap
+}
+
+.intro {
+    padding: 24px 8px 30px;
+    text-align: center;
+    background: #eaf8ff
+}
+
+.intro div {
+    font-size: 2.2rem
+}
+
+.intro span {
+    padding: 0 12px
+}
+
+.intro p {
+    max-width: 850px;
+    margin: auto;
+    font: 600 clamp(1.35rem, 2.4vw, 1.8rem) Caveat, cursive;
+    line-height: 1.25
+}
+
+.services {
+    padding: 35px 4%
+}
+
+.heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    margin-bottom: 22px;
+    color: var(--yellow);
+    font-size: 2.5rem
+}
+
+.heading h2,
+.contact h2 {
+    font-size: clamp(2.8rem, 5vw, 4rem);
+    color: var(--navy)
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    max-width: 1400px;
+    margin: auto
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 13px;
+    box-shadow: 0 8px 25px #073c7314
+}
+
+.pink {
+    background: #ffebe7
+}
+
+.blue {
+    background: #e3f4ff
+}
+
+.green {
+    background: #e7f7e9
+}
+
+.purple {
+    background: #f0eaff
+}
+
+.art {
+    display: grid;
+    place-items: center;
+    min-height: 92px;
+    font-size: 4.2rem;
+    text-align: center
+}
+
+.card h3 {
+    font-size: clamp(1.8rem, 2.3vw, 2.25rem)
+}
+
+.card p {
+    min-height: 65px;
+    font-size: .9rem
+}
+
+.card ul {
+    flex: 1;
+    padding-left: 19px;
+    margin: 10px 0 20px;
+    font-size: .83rem
+}
+
+.card li {
+    margin-bottom: 4px
+}
+
+.card li::marker {
+    color: #e2b900
+}
+
+.details {
+    width: 100%;
+    padding: 8px 14px;
+    border: 2px solid var(--navy);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--navy);
+    font-weight: 900;
+    cursor: pointer
+}
+
+.details:hover {
+    background: var(--navy);
+    color: #fff
+}
+
+.quick {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1400px;
+    margin: auto;
+    border-radius: 17px;
+    overflow: hidden;
+    background: var(--navy);
+    color: #fff
+}
+
+.quick a {
+    padding: 20px 10px;
+    text-align: center;
+    font-weight: 900;
+    border-right: 1px solid #ffffff99
+}
+
+.quick a:hover {
+    background: #185b96
+}
+
+.contact {
+    display: flex;
+    justify-content: space-between;
+    gap: 35px;
+    max-width: 1400px;
+    margin: auto;
+    padding: 45px 5%
+}
+
+.line {
+    width: 220px;
+    height: 7px;
+    margin: 8px 0 22px;
+    border-radius: 50%;
+    background: var(--yellow);
+    transform: rotate(-3deg)
+}
+
+.contact-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    margin-bottom: 25px
+}
+
+.contact-details>a,
+.contact-details>div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .83rem
+}
+
+.contact-details span {
+    display: flex;
+    flex-direction: column
+}
+
+.contact-details b {
+    font-size: .88rem
+}
+
+.contact-art {
+    flex: 0 1 390px;
+    align-self: center;
+    text-align: center;
+    font: 700 2.2rem/1 Caveat, cursive;
+    transform: rotate(-5deg)
+}
+
+footer {
+    padding: 28px 5%;
+    text-align: center;
+    background: var(--navy);
+    color: #fff
+}
+
+footer p {
+    margin-bottom: 7px;
+    color: var(--yellow);
+    font: 700 1.55rem Caveat, cursive
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: #021830b3
+}
+
+.modal[hidden] {
+    display: none
+}
+
+.modal-box {
+    position: relative;
+    width: min(100%, 480px);
+    padding: 35px;
+    border: 4px solid var(--yellow);
+    border-radius: 20px;
+    background: #fff
+}
+
+.modal-box button {
+    position: absolute;
+    top: 8px;
+    right: 14px;
+    border: 0;
+    background: none;
+    font-size: 2rem;
+    color: var(--navy);
+    cursor: pointer
+}
+
+.modal-box h2 {
+    font-size: 2.5rem;
+    margin: 10px 0 12px
+}
+
+.modal-box p {
+    margin-bottom: 25px
+}
+
+@media(max-width:1050px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr)
+    }
+}
+
+@media(max-width:760px) {
+    header {
+        padding: 10px 5%
+    }
+
+    #menuToggle {
+        display: block
+    }
+
+    nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 10px 6%;
+        background: #fff
+    }
+
+    nav.open {
+        display: flex
+    }
+
+    nav a {
+        padding: 13px 0 !important
+    }
+
+    .nav-button {
+        text-align: center;
+        margin: 5px 0 10px
+    }
+
+    .hero {
+        grid-template-columns: 1fr
+    }
+
+    .hero-copy {
+        padding: 35px 7% 15px;
+        text-align: center
+    }
+
+    .landscape {
+        min-height: 240px
+    }
+
+    .castle {
+        top: 35px;
+        right: 27%;
+        font-size: 4rem
+    }
+
+    .village {
+        bottom: 15px;
+        left: 12%;
+        font-size: 3rem
+    }
+
+    .mountain {
+        border-left-width: 170px;
+        border-right-width: 170px;
+        border-bottom-width: 230px
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        max-width: 500px
+    }
+
+    .quick {
+        grid-template-columns: repeat(2, 1fr);
+        margin: 0 4%
+    }
+
+    .quick a {
+        border-bottom: 1px solid #ffffff80
+    }
+
+    .contact {
+        flex-direction: column;
+        padding: 40px 7%
+    }
+
+    .contact-details {
+        flex-direction: column;
+        gap: 15px
+    }
+
+    .contact-art {
+        flex-basis: auto
+    }
+}
