@@ -263,10 +263,7 @@ h1 {
     font-size: clamp(1.8rem, 2.3vw, 2.25rem)
 }
 
-.card p {
-    min-height: 65px;
-    font-size: .9rem
-}
+
 
 .card ul {
     flex: 1;
