@@ -2,6 +2,76 @@
 $businessName = 'Expat Girl Friday';
 $location = 'Xàtiva, Spain';
 $phoneNumber = '+34 722 116 205';
+$whatsappNumber = '34722116205';
+
+// functions
+function greetClient($name = '')
+{
+    if (empty($name)) {
+        return 'Welcome to Expat Girl Friday! ' . $name . '';
+    }
+    // return "Welcome to Expat Girl Friday, ". $name . "!";
+}
+
+// Services list array we declare arrays with $name = [ ... ]  
+// we can loop through them in the HTML to create the cards dynamically. 
+// This is a more maintainable approach than hardcoding each card in the HTML.
+// Services list (Array)
+$services = [
+    [
+        'key' => 'interpreting',
+        'class' => 'pink',
+        'icon' => '🇬🇧 💬 🇪🇸',
+        'title' => 'English ↔ Spanish Interpreting',
+        'description' => 'Take the stress out of appointments and official business.',
+        'items' => [
+            'Doctor & hospital appointments',
+            'Police station visits',
+            'Town Hall appointments',
+            'Local business communication'
+        ]
+    ],
+    [
+        'key' => 'van',
+        'class' => 'blue',
+        'icon' => '🚐',
+        'title' => 'Large Van & Collection Service',
+        'description' => "Got something that won't fit in the car?",
+        'items' => [
+            'Furniture collections',
+            'House clearances',
+            'Moving larger items',
+            'Collection of purchases',
+            'Tip / recycling runs'
+        ]
+    ],
+    [
+        'key' => 'airport',
+        'class' => 'green',
+        'icon' => '✈️',
+        'title' => 'Airport Transfers',
+        'description' => 'Take the hassle out of getting to or from the airport.',
+        'items' => [
+            'Airport runs in my car',
+            'Collection / drop-off',
+            'Help with luggage',
+            'Reliable personal service'
+        ]
+    ],
+    [
+        'key' => 'parking',
+        'class' => 'purple',
+        'icon' => '🅿️',
+        'title' => 'Secure Private Parking',
+        'description' => "Need somewhere safe to leave your car while you're away?",
+        'items' => [
+            'Secure private parking',
+            'Based in Xàtiva',
+            'Ideal for airport trips',
+            'Longer periods away'
+        ]
+    ]
+];
 
 ?>
 <!doctype html>
@@ -33,6 +103,10 @@ $phoneNumber = '+34 722 116 205';
         <div class="sun">☀</div>
         <h1>Expat Girl Friday ♡</h1>
         <div class="highlight">Your local helping hand<br>in Spain</div>
+        
+        <!-- we dont have to put a name on the greeting until we have a session open -->
+        <p><?php echo greetClient(); ?></p>
+        
         <p>Friendly <b>•</b> Reliable <b>•</b> Practical <b>•</b> Bilingual</p>
         <a class="button" href="#services">Discover our services →</a>
     </div>
@@ -59,8 +133,26 @@ $phoneNumber = '+34 722 116 205';
         <h2>Our Services</h2>
         <span>〰</span>
     </div>
-    <div class="grid">
-<article class="card pink">
+        <div class="grid">
+            <?php foreach ($services as $service): ?>
+                <article class="card <?php echo $service['class']; ?>">
+                    <div class="art"><?php echo $service['icon']; ?></div>
+                    <h3><?php echo $service['title']; ?></h3>
+                    <p><?php echo $service['description']; ?></p>
+                    <ul>
+                        <?php foreach ($service['items'] as $item): ?>
+                            <li><?php echo $item; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <button class="details" data-service="<?php echo $service['key']; ?>">More information</button>
+
+                </article>
+                <?php endforeach; ?>
+        </div>
+
+</section>
+<!-- <div class="grid"> -->
+<!-- <article class="card pink">
     <div class="art">🇬🇧 💬 🇪🇸</div>
     <h3>English ↔ Spanish Interpreting</h3>
     <p>Take the stress out of appointments and official business.</p>
@@ -71,8 +163,8 @@ $phoneNumber = '+34 722 116 205';
         <li>Local business communication</li>
     </ul>
     <button class="details" data-service="interpreting">More information ›</button>
-</article>
-<article class="card blue">
+</article> -->
+<!-- <article class="card blue">
     <div class="art">🚐</div>
     <h3>Large Van & Collection Service</h3>
     <p>Got something that won't fit in the car?</p>
@@ -83,8 +175,8 @@ $phoneNumber = '+34 722 116 205';
         <li>Tip / recycling runs</li>
     </ul>
     <button class="details" data-service="van">More information ›</button>
-</article>
-<article class="card green">
+</article> -->
+<!-- <article class="card green">
     <div class="art">✈️</div>
     <h3>Airport Transfers</h3>
     <p>Take the hassle out of getting to or from the airport.</p>
@@ -95,8 +187,8 @@ $phoneNumber = '+34 722 116 205';
         <li>Reliable personal service</li>
     </ul>
     <button class="details" data-service="airport">More information ›</button>
-</article>
-<article class="card purple">
+</article> -->
+<!-- <article class="card purple">
     <div class="art">🅿️</div>
     <h3>Secure Private Parking</h3>
     <p>Need somewhere safe to leave your car while you're away?</p>
@@ -107,9 +199,9 @@ $phoneNumber = '+34 722 116 205';
         <li>Longer periods away</li>
     </ul>
     <button class="details" data-service="parking">More information ›</button>
-</article>
-</div>
-</section>
+</article> -->
+<!-- </div> -->
+
 <section class="quick">
     <a href="#services">💬 Interpreting</a>
 <a href="#services">🚐 Van & Collections</a>
@@ -122,7 +214,7 @@ $phoneNumber = '+34 722 116 205';
     <div class="line"></div>
 
     <div class="contact-details">
-        <a href="tel:+34722116205">
+        <a href="https://wa.me/<?php echo $whatsappNumber; ?>" target="_blank">
             ☎ <span><b>Phone / WhatsApp</b><?php echo $phoneNumber; ?><br></span>
         </a>
 
