@@ -1,9 +1,14 @@
 <?php
-$businessName = 'Expat Girl Friday';
-$location = 'Xàtiva, Spain';
-$phoneNumber = '+34 722 116 205';
+require 'config.php';
+
+// 1. Retrieve & clear message from session (if set from previous submission)
+$formMessage = $_SESSION['form_message'] ?? '';
+unset($_SESSION['form_message']);
 
 ?>
+
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -33,6 +38,10 @@ $phoneNumber = '+34 722 116 205';
         <div class="sun">☀</div>
         <h1>Expat Girl Friday ♡</h1>
         <div class="highlight">Your local helping hand<br>in Spain</div>
+        
+        <!-- we dont have to put a name on the greeting until we have a session open -->
+        <p><?php echo greetClient(); ?></p>
+        
         <p>Friendly <b>•</b> Reliable <b>•</b> Practical <b>•</b> Bilingual</p>
         <a class="button" href="#services">Discover our services →</a>
     </div>
@@ -51,7 +60,7 @@ $phoneNumber = '+34 722 116 205';
 </section>
 <section class="intro">
     <div>🇬🇧 <span>♡</span> 🇪🇸</div>
-    <p>Whether you're new to Spain, need help with an official appointment, have furniture to collect, or simply need a reliable pair of hands — Expat Girl Friday is here to help.</p>
+    <p>Whether you are new to Spain, need help with an official appointment, have furniture to collect, or simply need a reliable pair of hands — Expat Girl Friday is here to help.</p>
 </section>
 <section id="services" class="services">
     <div class="heading">
@@ -59,70 +68,79 @@ $phoneNumber = '+34 722 116 205';
         <h2>Our Services</h2>
         <span>〰</span>
     </div>
-    <div class="grid">
-<article class="card pink">
-    <div class="art">🇬🇧 💬 🇪🇸</div>
-    <h3>English ↔ Spanish Interpreting</h3>
-    <p>Take the stress out of appointments and official business.</p>
-    <ul>
-        <li>Doctor & hospital appointments</li>
-        <li>Police station visits</li>
-        <li>Town Hall appointments</li>
-        <li>Local business communication</li>
-    </ul>
-    <button class="details" data-service="interpreting">More information ›</button>
-</article>
-<article class="card blue">
-    <div class="art">🚐</div>
-    <h3>Large Van & Collection Service</h3>
-    <p>Got something that won't fit in the car?</p>
-    <ul>
-        <li>Furniture collections</li><li>House clearances</li>
-        <li>Moving larger items</li>
-        <li>Collection of purchases</li>
-        <li>Tip / recycling runs</li>
-    </ul>
-    <button class="details" data-service="van">More information ›</button>
-</article>
-<article class="card green">
-    <div class="art">✈️</div>
-    <h3>Airport Transfers</h3>
-    <p>Take the hassle out of getting to or from the airport.</p>
-    <ul>
-        <li>Airport runs in my car</li>
-        <li>Collection / drop-off</li>
-        <li>Help with luggage</li>
-        <li>Reliable personal service</li>
-    </ul>
-    <button class="details" data-service="airport">More information ›</button>
-</article>
-<article class="card purple">
-    <div class="art">🅿️</div>
-    <h3>Secure Private Parking</h3>
-    <p>Need somewhere safe to leave your car while you're away?</p>
-    <ul>
-        <li>Secure private parking</li>
-        <li>Based in Xàtiva</li>
-        <li>Ideal for airport trips</li>
-        <li>Longer periods away</li>
-    </ul>
-    <button class="details" data-service="parking">More information ›</button>
-</article>
-</div>
+        <div class="grid">
+            <?php foreach ($services as $service): ?>
+                <article class="card <?php echo $service['class']; ?>">
+
+
+                    <div class="art"><?php echo $service['icon']; ?></div>
+                    
+                    
+                    <h3><?php echo $service['title']; ?></h3>
+                    <p><?php echo $service['description']; ?></p>
+                    <ul>
+                        <?php foreach ($service['items'] as $item): ?>
+                            <li><?php echo $item; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <button class="details" data-service="<?php echo $service['key']; ?>">More information</button>
+
+                </article>
+                <?php endforeach; ?>
+        </div>
+
 </section>
+
 <section class="quick">
     <a href="#services">💬 Interpreting</a>
 <a href="#services">🚐 Van & Collections</a>
 <a href="#services">✈️ Airport Runs</a>
 <a href="#services">🅿️ Secure Parking</a>
 </section>
+
+<!-- CONTACT SECTION -->
 <section id="contact" class="contact">
 <div>
     <h2>Get in touch!</h2>
     <div class="line"></div>
 
+<!-- DISPLAY GREEN SUCCESS BANNER -->
+<?php if (!empty($formMessage)): ?>
+    <div id="successBanner" class="banner-success">
+        <?php echo $formMessage; ?>
+    </div>
+<?php endif; ?>
+
+<!-- REFACTORED CONTACT FORM -->
+<form action="process-form.php" method="POST" class="contact-form">
+    <div class="form-group">
+        <label class="form-label">Your Name:</label>
+        <input type="text" name="client_name" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Your Email:</label>
+        <input type="email" name="client_email" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Your Message:</label>
+        <textarea name="client_message" rows="3" class="form-control" required></textarea>
+    </div>
+
+    <div class="form-group-lg">
+        <label class="form-checkbox-label">
+            <input type="checkbox" name="subscribe" value="1" checked> 
+            Subscribe to local news, offers & updates ♡
+        </label>
+    </div>
+
+    <button type="submit" class="button">Send Message →</button>
+</form>
+
+
     <div class="contact-details">
-        <a href="tel:+34722116205">
+        <a href="https://wa.me/<?php echo $whatsappNumber; ?>" target="_blank">
             ☎ <span><b>Phone / WhatsApp</b><?php echo $phoneNumber; ?><br></span>
         </a>
 
