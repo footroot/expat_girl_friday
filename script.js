@@ -66,3 +66,12 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && !modal.hidden) hide();
 });
 document.querySelector("#year").textContent = new Date().getFullYear();
+
+// Auto-hide success message banner after 3 seconds
+const banner = document.getElementById('successBanner');
+if (banner) {
+  setTimeout(() => {
+    banner.style.opacity = '0';
+    setTimeout(() => banner.remove(), 500); // Smoothly removes element after fade out
+  }, 3000);
+}
