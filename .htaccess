@@ -1,0 +1,52 @@
+<!-- # Block access to hidden files (.env, .git, etc.)
+RedirectMatch 404 /\.git
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# Disable Directory Browsing
+Options -Indexes -->
+
+# ==============================================================================
+# XAMPP LOCALHOST .HTACCESS CONFIGURATION
+# ==============================================================================
+
+# 1. PREVENT DIRECTORY BROWSING
+# Disables folder listing if index.php is missing (stops users from viewing files)
+Options -Indexes
+
+# 2. DEFAULT DOCUMENT SETTING
+DirectoryIndex index.php
+
+# 3. SECURITY: BLOCK ACCESS TO SENSITIVE FILES
+# Prevents web access to .env, config backups, git logs, or database SQL dumps
+<FilesMatch "^\.|\.(env|sql|log|md|json|sh|bak)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# 4. ENABLE REWRITE ENGINE (URL Rewriting)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Force UTF-8 encoding header
+    AddDefaultCharset UTF-8
+</IfModule>
+
+# 5. PHP & ENVIRONMENT HARDENING (Local Development)
+<IfModule mod_php7.c>
+    php_value session.cookie_httponly 1
+    php_value session.use_strict_mode 1
+    php_value display_errors On
+</IfModule>
+<IfModule mod_php.c>
+    php_value session.cookie_httponly 1
+    php_value session.use_strict_mode 1
+    php_value display_errors On
+</IfModule>

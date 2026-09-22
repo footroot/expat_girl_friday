@@ -1,5 +1,10 @@
 <?php
 session_start();
+// Generate a secure random CSRF token if one doesn't exist
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 require_once 'db.php';
 
 $businessName = 'Expat Girl Friday';
@@ -36,5 +41,9 @@ foreach ($dbServices as $row) {
 
     ];
 }
+
+// Admin configuration 
+// Admin Configuration (Replace 'Secret123!' with your desired password)
+define('ADMIN_PASSWORD_HASH', password_hash('@Xativa2026', PASSWORD_DEFAULT));
 
 ?>
