@@ -4,7 +4,7 @@ require 'config.php';
 // Handle Logout
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
     unset($_SESSION['is_admin']);
-    header('Location: admin.php');
+    header('Location: admin');
     exit();
 }
 
@@ -98,7 +98,7 @@ if ($isLoggedIn && $_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    header('Location: admin.php');
+    header('Location: admin');
     exit();
 }
 
@@ -166,17 +166,17 @@ unset($_SESSION['admin_notice']);
                 </div>
                 <button type="submit" class="button" style="margin-top: 10px;">Login →</button>
             </form>
-            <p style="margin-top: 25px;"><a href="index.php">← Back to main site</a></p>
+            <p style="margin-top: 25px;"><a href="index">← Back to main site</a></p>
 
         <?php else: ?>
             <!-- ADMIN DASHBOARD -->
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <h1>⚙️ Admin Management Dashboard</h1>
                 <div style="display: flex; gap: 10px;">
-                    <a href="admin.php?action=export_csv" class="button" style="background: #10b981; color: #ffffff; text-decoration: none; padding: 8px 14px; font-size: 0.9rem; font-weight: bold; border-radius: 6px;">
+                    <a href="admin?action=export_csv" class="button" style="background: #10b981; color: #ffffff; text-decoration: none; padding: 8px 14px; font-size: 0.9rem; font-weight: bold; border-radius: 6px;">
                         Export Subscribers CSV 📊
                     </a>
-                    <a href="admin.php?action=logout" class="button" style="background: #e2e8f0; color: #1e293b; text-decoration: none; padding: 8px 14px; font-size: 0.9rem; font-weight: bold; border-radius: 6px;">
+                    <a href="admin?action=logout" class="button" style="background: #e2e8f0; color: #1e293b; text-decoration: none; padding: 8px 14px; font-size: 0.9rem; font-weight: bold; border-radius: 6px;">
                         Logout 🚪
                     </a>
                 </div>
@@ -193,7 +193,7 @@ unset($_SESSION['admin_notice']);
                 <div class="modal-overlay">
                     <div class="modal-content">
                         <h3>✏️ Edit Service: <?php echo htmlspecialchars($editingService['title']); ?></h3>
-                        <form action="admin.php" method="POST" style="margin-top: 15px;">
+                        <form action="admin" method="POST" style="margin-top: 15px;">
                             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                             <input type="hidden" name="edit_service" value="1">
                             <input type="hidden" name="service_id" value="<?php echo $editingService['id']; ?>">
@@ -354,7 +354,7 @@ unset($_SESSION['admin_notice']);
                 </table>
             <?php endif; ?>
 
-            <p style="margin-top: 25px;"><a href="index.php">← Back to main site</a></p>
+            <p style="margin-top: 25px;"><a href="index">← Back to main site</a></p>
 
         <?php endif; ?>
 

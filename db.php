@@ -1,7 +1,7 @@
 <?php
 $host = 'localhost';
-$db = 'expat_girl_friday';
-$user = 'root';
+$db = 'u148878710_kine_members';
+$user = 'u148878710_footroot';
 $pass = '';
 $charset = 'utf8mb4';
 

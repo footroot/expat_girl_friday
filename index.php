@@ -1,13 +1,17 @@
 <?php
 require 'config.php';
 
-// 1. Retrieve & clear message from session (if set from previous submission)
+// 1. Retrieve & clear messages from session (if set from previous submission)
 $formMessage = $_SESSION['form_message'] ?? '';
 unset($_SESSION['form_message']);
 
+/* ========================================================================== */
+/* <!-- CHANGE 1: Retrieve and clear rate limit / error messages -->       */
+/* ========================================================================== */
+$formError = $_SESSION['form_error'] ?? '';
+unset($_SESSION['form_error']);
+/* ========================================================================== */
 ?>
-
-
 
 <!doctype html>
 <html lang="en">
@@ -111,8 +115,27 @@ unset($_SESSION['form_message']);
     </div>
 <?php endif; ?>
 
+/* ========================================================================== */
+/* <!-- CHANGE 2A: Display Red Error Banner for Rate Limits or Invalid Data --> */
+/* ========================================================================== */
+<?php if (!empty($formError)): ?>
+    <div id="errorBanner" class="banner-error" style="background: #fef2f2; color: #991b1b; padding: 12px 16px; border-radius: 8px; border: 1px solid #fecaca; margin-bottom: 20px;">
+        <?php echo htmlspecialchars($formError, ENT_QUOTES, 'UTF-8'); ?>
+    </div>
+<?php endif; ?>
+/* ========================================================================== */
+
 <!-- REFACTORED CONTACT FORM -->
-<form action="process-form.php" method="POST" class="contact-form">
+<form action="process-form" method="POST" class="contact-form">
+
+/* ========================================================================== */
+/* <!-- CHANGE 2B: Add Hidden Honeypot Field for Spam Bots -->                */
+/* ========================================================================== */
+    <div style="display: none !important;">
+        <input type="text" name="website_hp" tabindex="-1" autocomplete="off">
+    </div>
+/* ========================================================================== */
+
     <div class="form-group">
         <label class="form-label">Your Name:</label>
         <input type="text" name="client_name" class="form-control" required>
