@@ -1,14 +1,14 @@
 <?php
-$host = 'localhost';
-$db = 'u148878710_kine_members';
-$user = 'u148878710_footroot';
-$pass = '';
-$charset = 'utf8mb4';
+$host       = 'localhost';
+$db         = 'expat_girl_friday';
+$user       = 'root';
+$pass       = '';
+$charset    = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
 $options = [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_ERRMODE       => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     PDO::ATTR_EMULATE_PREPARES => false,
 ];
@@ -16,6 +16,6 @@ $options = [
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-    throw new \PDOException($e->getMessage(), (int) $e->getCode());
+    throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
 ?>
